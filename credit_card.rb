@@ -4,6 +4,7 @@ require_relative './luhn_validator'
 require 'json'
 require 'digest'
 
+# credit card entity
 class CreditCard
   # TODO: mixin the LuhnValidator using an 'include' statement
   include LuhnValidator
@@ -20,7 +21,7 @@ class CreditCard
   end
 
   # returns json string
-  def to_json
+  def to_json(*_args)
     {
       # TODO: setup the hash with all instance vairables to serialize into json
       number: @number,
@@ -39,7 +40,7 @@ class CreditCard
   def self.from_s(card_s)
     # TODO: deserializing a CreditCard object
     data = JSON.parse(card_s)
-    new(data['number'], data['expiration_date'],data['owner'],data['credit_network'])
+    new(data['number'], data['expiration_date'], data['owner'], data['credit_network'])
   end
 
   # return a hash of the serialized credit card object
@@ -59,11 +60,3 @@ class CreditCard
     Digest::SHA256.hexdigest(to_json)
   end
 end
-
-# test code
-# number = '4539075978941247' # visa card test
-# card = CreditCard.new(number, nil, nil, nil)
-# puts card.validate_checksum
-# puts CreditCard.from_s(card.to_s)
-# puts card.hash
-# puts card.hash_secure
