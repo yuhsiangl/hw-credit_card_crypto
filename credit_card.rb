@@ -63,7 +63,7 @@ end
 # test code
 # number = '4539075978941247' # visa card test
 # card = CreditCard.new(number, nil, nil, nil)
-# puts card
+# puts card.validate_checksum
 # puts CreditCard.from_s(card.to_s)
 # puts card.hash
 # puts card.hash_secure
